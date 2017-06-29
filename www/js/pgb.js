@@ -389,19 +389,17 @@ $("#stop_budzik").click(function() {
 };
  
     function getWorkAudio(){
-      localStorage.setItem("WA","file:///projekt/www/audio/1.mp3");
-      document.getElementById("workAudio").innerHTML = localStorage.getItem("WA");
       var e = document.getElementById("workAudio");
       var strUser1 = e.options[e.selectedIndex].text;
-      var a = new Audio(strUser1);
+      localStorage.setItem("WA",strUser1);
+      var a = new Audio(localStorage.getItem("WA"));
       return a;
     }
  
     function getBreakAudio(){
-       localStorage.setItem("BA","file:///projekt/www/audio/2.mp3");
-       document.getElementById("breakAudio").innerHTML = localStorage.getItem("BA");
        var f = document.getElementById("breakAudio");
        var strUser2 = f.options[f.selectedIndex].text;
-       var b = new Audio(strUser2);
+       localStorage.setItem("BA",strUser2);
+       var b = new Audio(localStorage.getItem("BA"));
        return b;
     }

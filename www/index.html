@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+  <link href='css/bootstrap.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="css/Exo-Regular.otf" rel="stylesheet">
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="cordova.js"></script>
+  <script src="js/pgb.js"></script>
+ 
+</head>
+<body onload="init()">
+ 
+<div data-role="page" id="page1">
+  <div data-role="header" id="hed">
+    <h1>IntervalTimer</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <div data-role="tabs">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#fragment-1" class="ui-btn-active">Zegar/Budzik</a></li>
+          <li><a href="#fragment-2">Stoper/Minutnik</a></li>
+          <li><a href="#fragment-3">Zegar interwałowy</a></li>
+        </ul>
+      </div>
+      <div id="fragment-1">
+        <div class="text-center">
+<div id="clock-wrapper"></div>
+ 
+<div>
+    <audio></audio>
+</div>
+<div>
+    <input type="text" value="tutaj wklej link" />
+</div>           
+   <div class="alrm-main"> <div class="txtoftime">Wprowadź czas</div>
+  <input class="getalarmtime" type="time" placeholder="12:10"/>
+    <div type="button" class="btn btn-success" id="btntosetalrm">Ustaw budzik</div>
+    </div>
+    <div class="when-alrm-ring">Budzik zadzwoni o <span class="aumkar"></span></div>   
+    <br/>
+    <div id="stop_budzik" type="button" class="btn btn-success">Restart</div>
+      </div>
+      </div>
+      <div id="fragment-2">
+        <div class="timer">
+          <span class="hour">00</span>:<span class="minute">00</span>:<span class="second">00</span>:<span class="milisecond">00</span>
+        </div>
+        <div class="text-center">
+        <div class="btn-group-vertical">
+          <div class="btn btn-primary btn-lg" onClick="timer.start(1000)">Start</div>
+           <div class="btn btn-primary btn-lg" onClick="timer.stop()">Stop</div>
+            <div class="btn btn-primary btn-lg" onClick="timer.reset(0)">Reset</div>
+           <div class="btn btn-primary btn-lg" onClick="timer.mode(1)">Stoper</div>
+            <div class="btn btn-primary btn-lg" onClick="timer.mode(0)">Minutnik</div>
+             <div class="btn btn-primary btn-lg" onClick="timer.setTime()">Ustaw czas</div>
+          <input class="timeSetter" type=time step="1">
+        </div>
+        </div>
+      </div>
+      <div id="fragment-3">
+        <div class="container-fluid">
+ 
+          <div class="row">
+ 
+            <div class="row">
+              <div class="text-center">
+                <h3 id="work_label">ćwiczenia</h3>
+                <div class="row">
+                  <div id="subtract_work" type="button" class="btn btn-primary btn-lg">-</div>
+                  <div id="work_time" type="button" class="btn btn-primary btn-lg">1</div>
+                  <div id="add_work" type="button" class="btn btn-primary btn-lg">+</div>
+                  <form id>
+                  <div class="form-group" id="f1">
+          <label for="workAudio">wybierz utwór</label>
+          <select class="form-control" id="workAudio">            
+              <option value="1">audio/1.mp3</option>
+              <option value="2">audio/2.mp3</option>
+              <option value="3">audio/3.mp3</option>
+              <option value="4">audio/4.mp3</option>
+              <option value="5">audio/5.mp3</option>
+              <option value="6">audio/6.mp3</option>
+              <option value="7">audio/7.mp3</option>
+            </select>
+          </div>
+          </form>
+                </div>
+              </div>
+            </div>
+ 
+            <div class="row">
+              <div class="text-center">
+                <h3 id="break_label">przerwa</h3>
+                <div class="row">
+                  <div id="subtract_break" type="button" class="btn btn-danger btn-lg">-</div>
+                  <div id="break_time" type="button" class="btn btn-danger btn-lg">1</div>
+                  <div id="add_break" type="button" class="btn btn-danger btn-lg">+</div>                  
+                  <form>
+                  <div class ="form-group" id="f2">
+          <label for="breakAudio">wybierz utwór</label>
+          <select class ="form-control" id="breakAudio">
+              <option value="1">audio/1.mp3</option>
+              <option value="2">audio/2.mp3</option>
+              <option value="3">audio/3.mp3</option>
+              <option value="4">audio/4.mp3</option>
+              <option value="5">audio/5.mp3</option>
+              <option value="6">audio/6.mp3</option>
+              <option value="7">audio/7.mp3</option>
+            </select>
+          </div>
+                  </form>
+                </div>
+                  
+              </div>
+            </div>
+ 
+          </div>
+ 
+          <br>
+ 
+          <div class="row text-center">    
+            <div id="start_timer" type="button" class="btn btn-success">Start</div>                   
+          </div>
+ 
+          <br>
+ 
+          <div class="row text-center">
+            <h1 id="time_left"></h1>
+          </div>
+ 
+          <div class="row">
+ 
+            <div class="col-sm-1"></div>
+ 
+            <div class="col-sm-10">
+              <div class="progress">
+                <div id="work_progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                  <span class="sr-only"></span>
+                </div>
+              </div>
+ 
+              <div class="progress">
+                <div id="break_progress" class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+ 
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1"></div>            
+          </div>
+          <center><div id="stop_timer" type="button" class="btn btn-success">Restart</div></center>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+ 
+</body>
+</html>

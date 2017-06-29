@@ -398,7 +398,7 @@ $("#stop_budzik").click(function() {
     }
  
     function getBreakAudio(){
-       localStorage.setItem("BA","file:///projekt/www/audio/1.mp3");
+       localStorage.setItem("BA","file:///projekt/www/audio/2.mp3");
        document.getElementById("breakAudio").innerHTML = localStorage.getItem("BA");
        var f = document.getElementById("breakAudio");
        var strUser2 = f.options[f.selectedIndex].text;
